@@ -17,7 +17,7 @@ class BNK48DisplayActivity : AppCompatActivity() {
         val luckyNumber: Int = Math.abs(stringToLuckyNumber(input))
         val index: Int = indexByNumber(luckyNumber, choice)
         val name: String = findNameByIndex(index, choice)
-        imageView.setImageResource(R.mipmap.ic_launcher)
+        imageView.setImageResource(R.drawable.placeholder)
 
         setImageByName(name)
         textViewName.text = name.toUpperCase()

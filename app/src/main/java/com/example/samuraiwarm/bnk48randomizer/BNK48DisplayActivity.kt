@@ -2,7 +2,6 @@ package com.example.samuraiwarm.bnk48randomizer
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import kotlinx.android.synthetic.main.activity_bnk48_display.*
 
 class BNK48DisplayActivity : AppCompatActivity() {
@@ -11,30 +10,44 @@ class BNK48DisplayActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bnk48_display)
 
+        //when the activity is created, we can obtain the data from that intent
         val input = intent.getStringExtra("input")
         val choice = intent.getStringExtra("choice")
 
-        val luckyNumber: Int = Math.abs(stringToLuckyNumber(input))
-        val index: Int = indexByNumber(luckyNumber, choice)
-        val name: String = findNameByIndex(index, choice)
+        //for the lolz
         imageView.setImageResource(R.drawable.placeholder)
 
+        val name: String = doingTheMagicWithInput(input, choice)
+
         setImageByName(name)
+
         textViewName.text = name.toUpperCase()
 
-
         button2.setOnClickListener {
+            //this activity is actually on top of NumberInputActivity, so if
+            //you finish this activity, the NumberInputActivity will show up
             finish()
         }
     }
 
-    private fun stringToLuckyNumber(input: String): Int = input.hashCode()
+    //this function receives 2 inputs (input: String, choice: String)
+    //and returns String as an output
+    private fun doingTheMagicWithInput(input: String, choice: String): String {
+        val luckyNumber: Int = stringToLuckyNumber(input)
+        val luckyIndex: Int = indexByNumber(luckyNumber, choice)
+        return findNameByIndex(luckyIndex, choice)
+    }
+
+    //this function receives 1 input (input: String) and returns Int
+    //since the operation has only 1 step, we can directly use "="
+    //to assign what this function should do
+    private fun stringToLuckyNumber(input: String): Int = Math.abs(input.hashCode())
 
     private fun indexByNumber(number: Int, choice: String): Int {
         when (choice) {
-            "allGen" -> return number%allGenName.size
-            "firstGen" -> return number%firstGenName.size
-            "secondGen" -> return number%secondGenName.size
+            "allGen" -> return number % allGenName.size
+            "firstGen" -> return number % firstGenName.size
+            "secondGen" -> return number % secondGenName.size
         }
         return -1
     }
@@ -105,6 +118,9 @@ class BNK48DisplayActivity : AppCompatActivity() {
         }
     }
 
+    //this is a list
+    //you can access the list of index from 0 to list.size - 1
+    //using list[index]
     private val firstGenName = mutableListOf(
             "cherprang",
             "izurina",
@@ -163,5 +179,6 @@ class BNK48DisplayActivity : AppCompatActivity() {
             "wee"
     )
 
+    //we have operations of adding lists together in kotlin! <3
     private val allGenName = firstGenName + secondGenName
 }

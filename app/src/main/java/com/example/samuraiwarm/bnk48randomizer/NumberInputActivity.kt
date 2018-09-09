@@ -12,15 +12,16 @@ class NumberInputActivity : AppCompatActivity() {
         setContentView(R.layout.activity_number_input)
 
         button.setOnClickListener {
-            //to send data through activities, we use Intent
-            //by referring this activity to the target activity
-
             var checkedChoice = ""
             when(radioGroup.checkedRadioButtonId){
                 radioButton.id -> checkedChoice = "allGen"
                 radioButton2.id -> checkedChoice = "firstGen"
                 radioButton3.id -> checkedChoice = "secondGen"
             }
+
+            //to send data through activities, we use Intent
+            //by referring this activity to the target activity
+            //after referring, we putExtra the value, and tag them with the name
             val intent = Intent(this, BNK48DisplayActivity::class.java).apply{
                 putExtra("input",editText.text.toString())
                 putExtra("choice",checkedChoice)

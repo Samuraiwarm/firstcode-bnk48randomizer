@@ -1,0 +1,31 @@
+package com.example.samuraiwarm.bnk48randomizer
+
+import android.content.Intent
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_number_input.*
+
+class NumberInputActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_number_input)
+
+        button.setOnClickListener {
+            //to send data through activities, we use Intent
+            //by referring this activity to the target activity
+
+            var checkedChoice = ""
+            when(radioGroup.checkedRadioButtonId){
+                radioButton.id -> checkedChoice = "allGen"
+                radioButton2.id -> checkedChoice = "firstGen"
+                radioButton3.id -> checkedChoice = "secondGen"
+            }
+            val intent = Intent(this, BNK48DisplayActivity::class.java).apply{
+                putExtra("input",editText.text.toString())
+                putExtra("choice",checkedChoice)
+            }
+            startActivity(intent)
+        }
+    }
+}

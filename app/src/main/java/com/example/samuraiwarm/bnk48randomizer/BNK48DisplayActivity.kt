@@ -11,23 +11,12 @@ class BNK48DisplayActivity : AppCompatActivity() {
         setContentView(R.layout.activity_bnk48_display)
 
         //when the activity is created, we can obtain the data from that intent
-        val input = intent.getStringExtra("input")
-        val choice = intent.getStringExtra("choice")
+//        val input = ???
+//        val choice = ???
 
         //for the lolz
         imageView.setImageResource(R.drawable.placeholder)
 
-        val name: String = doingTheMagicWithInput(input, choice)
-
-        setImageByName(name)
-
-        textViewName.text = name.toUpperCase()
-
-        button2.setOnClickListener {
-            //this activity is actually on top of NumberInputActivity, so if
-            //you finish this activity, the NumberInputActivity will show up
-            finish()
-        }
     }
 
     //this function receives 2 inputs (input: String, choice: String)
